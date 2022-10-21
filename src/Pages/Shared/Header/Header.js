@@ -8,9 +8,18 @@ import { FaUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import LeftSideNav from '../LeftSideNav/LeftSideNav';
+import Button from 'react-bootstrap/Button';
 
 const Header = () => {
-    const { user } = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
+    
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(error => console.error(error))
+    }
+    
+    
     return (
         <Navbar collapseOnSelect className="mb-4" expand="lg" bg="dark" variant="dark">
             <Container>
@@ -38,8 +47,8 @@ const Header = () => {
                                 user?.uid ?
                                     <>
                                         <span>
-                                            {user?.displayName}
-                                        </span>
+                                            {user?.displayName}</span>
+                                            <Button variant="light" onClick={handleLogOut}>Log out</Button>
                                     </>
                                     :
                                     <>

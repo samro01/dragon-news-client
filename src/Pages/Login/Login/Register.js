@@ -46,10 +46,10 @@ const Register = () => {
             .catch(error => console.error(error));
     }
 
-    const handleEmailVerification  = () => {
+    const handleEmailVerification = () => {
         verifyEmail()
-        .then(() =>{})
-        .catch(error => console.error(error));
+            .then(() => { })
+            .catch(error => console.error(error));
     }
 
     const handleAccepted = event => {
@@ -82,6 +82,7 @@ const Register = () => {
                     onClick={handleAccepted}
                     label={<>Accept <Link to="/terms">Terms and conditions</Link></>} />
             </Form.Group>
+          
             <Button variant="primary" type="submit" disabled={!accepted}>
                 Register
             </Button>
