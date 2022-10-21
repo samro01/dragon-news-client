@@ -1,14 +1,16 @@
 import React, { useContext } from 'react';
+import { Image } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { FaUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import LeftSideNav from '../LeftSideNav/LeftSideNav';
 
 const Header = () => {
-    const {user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     return (
         <Navbar collapseOnSelect className="mb-4" expand="lg" bg="dark" variant="dark">
             <Container>
@@ -31,10 +33,30 @@ const Header = () => {
                         </NavDropdown>
                     </Nav>
                     <Nav>
-                        <Nav.Link href="#deets">{user.displayName}</Nav.Link>
-                        <Nav.Link eventKey={2} href="#memes">
-                            Dank memes
-                        </Nav.Link>
+                        <>
+                            {
+                                user?.uid ?
+                                    <>
+                                        <span>
+                                            {user?.displayName}
+                                        </span>
+                                    </>
+                                    :
+                                    <>
+                                        <Link to='/login'>Login</Link>
+                                        <Link to='/register'>Register</Link>
+
+                                    </>
+                            }
+                        </>
+
+                        <Link to="/profile">
+                            {user?.photoURL ? <Image
+                                style={{ height: '30px' }} roundedCircle
+                                src={user.photoURL}></Image>
+                                : <FaUser></FaUser>
+                            }
+                        </Link>
                     </Nav>
                     <div className='d-lg-none'>
                         <LeftSideNav></LeftSideNav>
